@@ -19,7 +19,48 @@ export const ProblemsPanel = (props: ProblemsPanelProps): JSX.Element => {
   const { data, options, timeRange, onOptionsChange } = props;
   const { layout, showTriggers, triggerSeverity, sortProblems } = options;
 
+  const playAudio = (triggers: ProblemDTO[]) => {
+    /*
+      TODO: 
+      Зарегистрировать уже висящие в панели проблемы,
+      чтобы не было 500+ аудио-воспроизведений. 
+    */
+
+    console.log('Сработало проигрывание аудио')
+    
+    if ((localStorage.getItem('existingTriggers')) !== '') {
+      // Получить зарегистрированные известные триггеры 
+      let existingTriggers = new Set(JSON.parse(localStorage.getItem('existingTriggers')) || []);
+      
+      // Пройти по списку имеющихся триггеров
+      for (let i = 0; i < triggers.length; i++) {
+        let trigger = triggers[i];
+        console.log(JSON.stringify(trigger))
+        const id = trigger.triggerid;
+        
+        // Если среди существующих триггеров нет текущего, то
+        if (!existingTriggers.has(id)) {
+          // Добавить текущий триггер в существующие
+          existingTriggers.add(id)
+          // Обновить localStorage
+          localStorage.setItem('existingTriggers', JSON.stringify(Array.from(existingTriggers)));
+          
+          // Воспроизвести аудио-оповещение
+          const audio = new Audio('http://95.163.229.27:8081/alert.mp3');
+          audio.play().catch((error) => {
+            console.error("Не удалось воспроизвести звук:", error);
+          });
+        } else {
+          console.log('ОК: новых проблем не обнаружено!')
+        }
+      }
+    } else {
+      console.error('Удалите existingTriggers из Storage')
+    }
+  }
+
   const prepareProblems = () => {
+    console.log(`Srabotala prepareProblems`)
     const problems: ProblemDTO[] = [];
     if (!data?.series) {
       return [];
@@ -36,12 +77,13 @@ export const ProblemsPanel = (props: ProblemsPanelProps): JSX.Element => {
         return [];
       }
     }
-
     let triggers = _.cloneDeep(problems);
 
     triggers = triggers.map((t) => formatTrigger(t));
     triggers = filterProblems(triggers);
     triggers = sortTriggers(triggers);
+
+    playAudio(triggers)
 
     return triggers;
   };

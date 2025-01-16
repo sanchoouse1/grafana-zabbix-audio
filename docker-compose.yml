@@ -3,11 +3,12 @@ version: '3.0'
 services:
   grafana:
     container_name: 'grafana-zabbix'
-    image: grafana/grafana-enterprise:${GF_VERSION:-main}
+    image: grafana/grafana-oss
     ports:
       - 3000:3000/tcp
     volumes:
       - ./dist:/var/lib/grafana/plugins/grafana-zabbix
+      - ./audio:/var/lib/grafana/public/audio
       - ./provisioning:/etc/grafana/provisioning
     environment:
       - TERM=linux
