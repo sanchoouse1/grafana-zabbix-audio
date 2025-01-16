@@ -15,9 +15,7 @@
 # Builded docs
 docs/site/
 
-# Tests
-dist/test/
-dist/test-setup/
+# Tests dist/test/ dist/test-setup/
 
 vendor
 src/vendor
@@ -36,8 +34,7 @@ e2e-results/
 npm-debug.log
 yarn-error.log
 
-# Built plugin
-dist/
+# Built plugin dist/
 ci/
 alexanderzobnin-zabbix-app.zip
 
