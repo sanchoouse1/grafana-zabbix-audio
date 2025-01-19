@@ -46,7 +46,7 @@ export const ProblemsPanel = (props: ProblemsPanelProps): JSX.Element => {
           localStorage.setItem('existingTriggers', JSON.stringify(Array.from(existingTriggers)));
           
           // Воспроизвести аудио-оповещение
-          const audio = new Audio('http://95.163.229.27:8081/alert.mp3');
+          const audio = new Audio('./audio/alert.mp3');
           audio.play().catch((error) => {
             console.error("Не удалось воспроизвести звук:", error);
           });
