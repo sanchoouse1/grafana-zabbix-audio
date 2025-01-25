@@ -53,6 +53,14 @@ const config = async (env): Promise<Configuration> => {
             },
           ],
         },
+        // Новое правило для аудиофайлов
+        {
+          test: /\.(mp3|wav|ogg)$/i, // Расширения аудиофайлов
+          type: 'asset/resource', // Webpack автоматически сохранит файл
+          generator: {
+            filename: 'assets/audio/[name][ext]', // Путь в выходной директории
+          },
+        },
       ],
     },
 

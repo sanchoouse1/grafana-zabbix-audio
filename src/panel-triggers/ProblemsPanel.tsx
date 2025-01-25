@@ -10,6 +10,8 @@ import { APIExecuteScriptResponse } from '../datasource/zabbix/connectors/zabbix
 import ProblemList from './components/Problems/Problems';
 import { AckProblemData } from './components/AckModal';
 import AlertList from './components/AlertList/AlertList';
+// TODO: добавить тип для аудиофайла, чтобы TS понимал его
+import alertAudio from './audio/alert.mp3';
 
 const PROBLEM_EVENTS_LIMIT = 100;
 
@@ -27,26 +29,26 @@ export const ProblemsPanel = (props: ProblemsPanelProps): JSX.Element => {
     */
 
     console.log('Сработало проигрывание аудио')
-    
+
     if ((localStorage.getItem('existingTriggers')) !== '') {
       // Получить зарегистрированные известные триггеры 
       let existingTriggers = new Set(JSON.parse(localStorage.getItem('existingTriggers')) || []);
-      
+
       // Пройти по списку имеющихся триггеров
       for (let i = 0; i < triggers.length; i++) {
         let trigger = triggers[i];
         console.log(JSON.stringify(trigger))
         const id = trigger.triggerid;
-        
+
         // Если среди существующих триггеров нет текущего, то
         if (!existingTriggers.has(id)) {
           // Добавить текущий триггер в существующие
           existingTriggers.add(id)
           // Обновить localStorage
           localStorage.setItem('existingTriggers', JSON.stringify(Array.from(existingTriggers)));
-          
+
           // Воспроизвести аудио-оповещение
-          const audio = new Audio('./audio/alert.mp3');
+          const audio = new Audio(alertAudio);
           audio.play().catch((error) => {
             console.error("Не удалось воспроизвести звук:", error);
           });
