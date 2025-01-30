@@ -50,8 +50,8 @@ export const ProblemsPanel = (props: ProblemsPanelProps): JSX.Element => {
           // Воспроизвести аудио-оповещение
           // const audio = new Audio('https://locator.global.bcs/shlapa/public/plugins/alexanderzobnin-zabbix-audio/assets/audio/alert.mp3');
           const audio = new Audio(alertAudio);
-	  console.log(`Ссылка на аудио ${alertAudio}`);
-	  audio.play().catch((error) => {
+	        console.log(`Ссылка на аудио ${alertAudio}`);
+	        audio.play().catch((error) => {
             console.error("Не удалось воспроизвести звук:", error);
           });
         } else {
