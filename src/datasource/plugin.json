@@ -1,7 +1,7 @@
 {
   "type": "datasource",
   "name": "Zabbix",
-  "id": "alexanderzobnin-zabbix-datasource",
+  "id": "alexanderzobnin-zabbix-datasource-audio",
   "metrics": true,
   "annotations": true,
   "backend": true,

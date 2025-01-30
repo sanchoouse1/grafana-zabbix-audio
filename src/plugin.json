@@ -1,7 +1,7 @@
 {
   "type": "app",
   "name": "Zabbix",
-  "id": "alexanderzobnin-zabbix-app",
+  "id": "alexanderzobnin-zabbix-app-audio",
   "info": {
     "description": "Zabbix plugin for Grafana",
     "author": {

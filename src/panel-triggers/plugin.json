@@ -1,7 +1,7 @@
 {
   "type": "panel",
   "name": "Zabbix Problems",
-  "id": "alexanderzobnin-zabbix-triggers-panel",
+  "id": "alexanderzobnin-zabbix-triggers-panel-audio",
   "info": {
     "author": {
       "name": "Grafana Labs",
